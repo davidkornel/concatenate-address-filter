@@ -1,0 +1,27 @@
+# config.yaml
+version: v1alpha1
+proxy:
+  port: 7001
+admin:
+  address: 127.0.0.1:9095
+static:
+  filters:
+  - name: ConcatenateAddress.v1
+  - name: quilkin.extensions.filters.capture_bytes.v1alpha1.CaptureBytes 
+    config:
+        size: 15
+  - name: quilkin.extensions.filters.debug.v1alpha1.Debug
+    config:
+      id: debug-1
+  - name: quilkin.extensions.filters.token_router.v1alpha1.TokenRouter
+  endpoints:
+  - address: 127.0.0.1:1111
+    metadata:
+      quilkin.dev/captured_bytes:
+        tokens:
+          - 127.0.0.1:11111
+  - address: 127.0.0.1:2222
+    metadata:
+      quilkin.dev/captured_bytes:
+        tokens:
+          - 127.0.0.1:22222
