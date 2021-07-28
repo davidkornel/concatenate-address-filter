@@ -19,7 +19,6 @@ use quilkin::runner::run;
 use std::str;
 
 
-
 /// The `ConcatenateBytes` filter's job is to add a byte packet to either the beginning or end of each UDP packet that passes
 /// through. This is commonly used to provide an auth token to each packet, so they can be routed appropriately.
 #[quilkin::filter("ConcatenateAddress.v1")]
@@ -45,14 +44,7 @@ impl FilterFactory for ConcatAddressFactory {
 
 impl Filter for ConcatenateAddress {
     fn read(&self, mut ctx: ReadContext) -> Option<ReadResponse> {
-        // println!("{}{:?}",ctx.from.to_string(),ctx.from.to_string().into_bytes().len());
-        for (key, value) in &ctx.metadata {
-            println!("{}", key);
-            let asd = str::from_utf8(ctx.metadata.get(key.as_ref()).unwrap().downcast_ref::<Vec<u8>>().unwrap());
-            println!("metadata: {:?}",asd);
-        }
         ctx.contents.extend(ctx.from.to_string().into_bytes().iter());
-        // println!("{:?}",str::from_utf8(&ctx.contents).unwrap());
         Some(ctx.into())
     }
 

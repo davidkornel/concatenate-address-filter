@@ -9,19 +9,24 @@ static:
   - name: ConcatenateAddress.v1
   - name: quilkin.extensions.filters.capture_bytes.v1alpha1.CaptureBytes 
     config:
+        strategy: SUFFIX
+        metadataKey: quilkin.dev
         size: 15
-  - name: quilkin.extensions.filters.debug.v1alpha1.Debug
-    config:
-      id: debug-1
+        remove: false
+  # - name: quilkin.extensions.filters.debug.v1alpha1.Debug
+  #   config:
+  #     id: debug-1
   - name: quilkin.extensions.filters.token_router.v1alpha1.TokenRouter
+    config:
+        metadataKey: quilkin.dev
   endpoints:
   - address: 127.0.0.1:1111
     metadata:
-      quilkin.dev/captured_bytes:
+      quilkin.dev:
         tokens:
-          - 127.0.0.1:11111
+          - MTI3LjAuMC4xOjExMTEx
   - address: 127.0.0.1:2222
     metadata:
-      quilkin.dev/captured_bytes:
+      quilkin.dev:
         tokens:
-          - 127.0.0.1:22222
+          - MTI3LjAuMC4xOjIyMjIy
